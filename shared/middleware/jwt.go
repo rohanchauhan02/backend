@@ -5,8 +5,8 @@ import (
 
 	"github.com/golang-jwt/jwt"
 	"github.com/labstack/echo"
-	"github.com/rohanchauhan2/loan-service/models"
-	"github.com/rohanchauhan2/loan-service/shared/util"
+	"github.com/rohanchauhan02/loan-service/models"
+	"github.com/rohanchauhan02/loan-service/shared/util"
 )
 
 func JWTAuthentication(next echo.HandlerFunc) echo.HandlerFunc {

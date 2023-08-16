@@ -2,8 +2,8 @@ package container
 
 import (
 	"github.com/fgrosse/goldi"
-	"github.com/rohanchauhan2/loan-service/shared/config"
-	"github.com/rohanchauhan2/loan-service/shared/database"
+	"github.com/rohanchauhan02/loan-service/shared/config"
+	"github.com/rohanchauhan02/loan-service/shared/database"
 )
 
 func DefaultContainer() *goldi.Container {

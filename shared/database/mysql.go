@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
-	"github.com/rohanchauhan2/loan-service/shared/config"
+	"github.com/rohanchauhan02/loan-service/shared/config"
 )
 
 // MysqlInterface is an interface represents methods that can be used to get mysql connection.
