@@ -25,7 +25,7 @@ type im struct {
 	DatabaseHost string `mapstructure:"DATABASE_HOST"`
 	DatabasePort string `mapstructure:"DATABASE_PORT"`
 	DatabaseUser string `mapstructure:"DATABASE_USER"`
-	DatabasePass string `mapstructure:"DATABASE_PASS"`
+	DatabasePass string `mapstructure:"DATABASE_PASSWORD"`
 	DatabaseName string `mapstructure:"DATABASE_NAME"`
 	JWTSecret    string `mapstructure:"JWT_SECRET"`
 }
@@ -79,15 +79,15 @@ func NewImmutableConfig() ImmutableConfigInterface {
 		appEnv, exists := os.LookupEnv("APP_ENV")
 		if exists {
 			if appEnv == "development" {
-				v.SetConfigFile("app.congig.dev")
+				v.SetConfigName("app.congig.dev")
 			} else {
-				v.SetConfigFile("app.config.prod")
+				v.SetConfigName("app.config.prod")
 			}
 		} else {
-			v.SetConfigFile("app.config.local")
+			v.SetConfigName("app.config.local")
 		}
 		v.AddConfigPath(".")
-		v.SetEnvPrefix("GO_")
+		// v.SetEnvPrefix("GO_")
 		v.AutomaticEnv()
 		if err := v.ReadInConfig(); err != nil {
 			log.Fatalf("Error reading config file, %s", err)

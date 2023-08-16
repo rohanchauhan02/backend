@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql" // mysql driver
 	"github.com/rohanchauhan02/loan-service/shared/config"
 )
 

@@ -51,5 +51,5 @@ func main() {
 	bankUsecase := bankUsecase.NewBankUsecase(bankRepo)
 
 	bankHandler.NewHandlerBank(e, bankUsecase)
-
+	e.Logger.Info(e.Start(fmt.Sprintf(":%s", conf.GetPort())))
 }
