@@ -6,9 +6,15 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/labstack/gommon/log"
+
 	bankHandler "github.com/rohanchauhan02/loan-service/domain/bank/delivery/http"
 	bankRepository "github.com/rohanchauhan02/loan-service/domain/bank/repository"
 	bankUsecase "github.com/rohanchauhan02/loan-service/domain/bank/usecase"
+
+	healthzHandler "github.com/rohanchauhan02/loan-service/domain/healthcheck/delivery/http"
+	healthzRepository "github.com/rohanchauhan02/loan-service/domain/healthcheck/repository"
+	healthzUsecase "github.com/rohanchauhan02/loan-service/domain/healthcheck/usecase"
+
 	"github.com/rohanchauhan02/loan-service/shared/config"
 	"github.com/rohanchauhan02/loan-service/shared/container"
 	"github.com/rohanchauhan02/loan-service/shared/database"
@@ -45,11 +51,12 @@ func main() {
 			return next(ac)
 		}
 	})
+	healthCheckRepo := healthzRepository.NewHealthCheckRepository(mysqlSession)
+	healthCheckUsecase := healthzUsecase.NewHelthCheckUsecase(healthCheckRepo)
+	healthzHandler.NewHandlerHealthcheck(e, healthCheckUsecase)
 
 	bankRepo := bankRepository.NewBankRepository(mysqlSession)
-
-	bankUsecase := bankUsecase.NewBankUsecase(bankRepo)
-
-	bankHandler.NewHandlerBank(e, bankUsecase)
+	bankUse := bankUsecase.NewBankUsecase(bankRepo)
+	bankHandler.NewHandlerBank(e, bankUse)
 	e.Logger.Info(e.Start(fmt.Sprintf(":%s", conf.GetPort())))
 }

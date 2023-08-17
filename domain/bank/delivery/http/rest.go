@@ -3,6 +3,7 @@ package http
 import (
 	"github.com/labstack/echo"
 	"github.com/rohanchauhan02/loan-service/domain/bank"
+	"github.com/rohanchauhan02/loan-service/shared/middleware"
 )
 
 type handlerBank struct {
@@ -13,7 +14,7 @@ func NewHandlerBank(e *echo.Echo, usecase bank.Usecase) {
 	handler := &handlerBank{
 		usecase: usecase,
 	}
-	e.POST("/bank", handler.CreateBank)
+	e.GET("/api/bank", handler.CreateBank, middleware.JWTAuthentication)
 }
 
 func (h *handlerBank) CreateBank(c echo.Context) error {

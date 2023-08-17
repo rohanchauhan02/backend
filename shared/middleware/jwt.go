@@ -31,13 +31,13 @@ func JWTAuthentication(next echo.HandlerFunc) echo.HandlerFunc {
 		tokenPart := splitedTokenHeader[1]
 
 		tk := &models.UserJWT{}
-
 		token, err := jwt.ParseWithClaims(tokenPart, tk, func(token *jwt.Token) (interface{}, error) {
 			return []byte(conf.GetJWTSecret()), nil
 		})
 		if err != nil {
 			return c.JSON(403, map[string]string{
 				"message": "Malformed authentication token",
+				"error":   err.Error(),
 			})
 		}
 		if !token.Valid {
