@@ -1,8 +1,11 @@
 package http
 
 import (
+	"net/http"
+
 	"github.com/labstack/echo"
 	"github.com/rohanchauhan02/loan-service/domain/bank"
+	"github.com/rohanchauhan02/loan-service/models"
 	"github.com/rohanchauhan02/loan-service/shared/middleware"
 )
 
@@ -14,9 +17,23 @@ func NewHandlerBank(e *echo.Echo, usecase bank.Usecase) {
 	handler := &handlerBank{
 		usecase: usecase,
 	}
-	e.GET("/api/bank", handler.CreateBank, middleware.JWTAuthentication)
+	e.POST("/api/loan-enquiry", handler.LoanEnquiry, middleware.JWTAuthentication)
+
 }
 
-func (h *handlerBank) CreateBank(c echo.Context) error {
-	return nil
+func (h *handlerBank) LoanEnquiry(c echo.Context) error {
+	reqPayload := &models.LoanEnquiryRequest{}
+
+	if err := c.Bind(&reqPayload); err != nil {
+		return c.JSON(http.StatusBadRequest, err)
+	}
+	if err := c.Validate(reqPayload); err != nil {
+		return c.JSON(http.StatusBadRequest, err)
+	}
+	resp, err := h.usecase.LoanEnquiry(c, reqPayload)
+
+	if err != nil {
+		return err
+	}
+	return c.JSON(http.StatusOK, resp)
 }

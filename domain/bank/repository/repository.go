@@ -1,17 +1,21 @@
 package repository
 
-import "github.com/jinzhu/gorm"
+import (
+	"github.com/jinzhu/gorm"
+	"github.com/rohanchauhan02/loan-service/domain/bank"
+)
 
 type repoHandler struct {
 	mysqlSession *gorm.DB
 }
 
-func NewBankRepository(mysqlSession *gorm.DB) *repoHandler {
+func NewBankRepository(mysqlSession *gorm.DB) bank.Repository {
 	return &repoHandler{
 		mysqlSession: mysqlSession,
 	}
 }
 
-func (r *repoHandler) CreateBank() error {
+func (r *repoHandler) CreateLead() error {
 	return nil
 }
+

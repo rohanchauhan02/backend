@@ -15,6 +15,10 @@ import (
 	healthzRepository "github.com/rohanchauhan02/loan-service/domain/healthcheck/repository"
 	healthzUsecase "github.com/rohanchauhan02/loan-service/domain/healthcheck/usecase"
 
+	userHandler "github.com/rohanchauhan02/loan-service/domain/user/delivery/http"
+	userRepository "github.com/rohanchauhan02/loan-service/domain/user/repository"
+	userUsecase "github.com/rohanchauhan02/loan-service/domain/user/usecase"
+
 	"github.com/rohanchauhan02/loan-service/shared/config"
 	"github.com/rohanchauhan02/loan-service/shared/container"
 	"github.com/rohanchauhan02/loan-service/shared/database"
@@ -55,8 +59,13 @@ func main() {
 	healthCheckUsecase := healthzUsecase.NewHelthCheckUsecase(healthCheckRepo)
 	healthzHandler.NewHandlerHealthcheck(e, healthCheckUsecase)
 
+	userRepo := userRepository.NewUserRepository(mysqlSession)
+	userUcase := userUsecase.NewUserUsecase(userRepo)
+	userHandler.NewUserHandler(e, userUcase)
+
 	bankRepo := bankRepository.NewBankRepository(mysqlSession)
 	bankUse := bankUsecase.NewBankUsecase(bankRepo)
 	bankHandler.NewHandlerBank(e, bankUse)
+
 	e.Logger.Info(e.Start(fmt.Sprintf(":%s", conf.GetPort())))
 }
