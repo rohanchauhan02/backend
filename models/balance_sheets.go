@@ -1,24 +1,24 @@
 package models
 
-type Lead struct{
-	BussinessName   string `json:"business_name"`
-	BussinessGST    string `json:"bussiness_gst"`
-	ContactNumber   int    `json:"contatc_number"`
-	Provider        string `json:"provider"`
-	LoanAmount      int    `json:"loan_amount"`
+type Lead struct {
+	BussinessName string `json:"business_name"`
+	BussinessGST  string `json:"bussiness_gst"`
+	ContactNumber string `json:"contatc_number"`
+	Provider      string `json:"provider"`
+	LoanAmount    int    `json:"loan_amount"`
 }
 
 type LoanEnquiryRequest struct {
-	BussinessName   string `json:"business_name"`
-	BussinessGST    string `json:"bussiness_gst"`
-	ContactNumber   int    `json:"contatc_number"`
-	Provider        string `json:"provider"`
-	LoanAmount      int    `json:"loan_amount"`
+	BussinessName string `json:"business_name" required:"true"`
+	BussinessGST  string `json:"bussiness_gst" required:"true"`
+	ContactNumber int    `json:"contatc_number" required:"true"`
+	Provider      string `json:"provider" required:"true"`
+	LoanAmount    int    `json:"loan_amount" required:"true"`
 }
 
-type BussinessDetail struct{
-	BussinessName   string `json:"business_name"`
-	BussinessGST    string `json:"bussiness_gst"`
+type BussinessDetail struct {
+	BussinessName string `json:"business_name"`
+	BussinessGST  string `json:"bussiness_gst"`
 }
 
 type BalanceSheet struct {
@@ -29,6 +29,6 @@ type BalanceSheet struct {
 }
 
 type LoanEnquiryResponse struct {
-	Name            string  `json:"name"`
-	PreAssessment   float64 `json:"pre_assessment"`
+	Name          string  `json:"name"`
+	PreAssessment float64 `json:"pre_assessment"`
 }

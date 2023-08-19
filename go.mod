@@ -6,6 +6,7 @@ require (
 	github.com/fgrosse/goldi v1.0.1
 	github.com/go-playground/validator/v10 v10.15.0
 	github.com/golang-jwt/jwt v3.2.2+incompatible
+	github.com/golang/mock v1.4.4
 	github.com/jinzhu/gorm v1.9.16
 	github.com/labstack/echo v3.3.10+incompatible
 	github.com/labstack/gommon v0.4.0

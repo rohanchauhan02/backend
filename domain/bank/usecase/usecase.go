@@ -19,7 +19,7 @@ func NewBankUsecase(repository bank.Repository) bank.Usecase {
 func (u *usecaseHandler) LoanEnquiry(c echo.Context, payload *models.LoanEnquiryRequest) (*models.LoanEnquiryResponse, error) {
 
 	// Create Lead in go routine
-	_ = u.repository.CreateLead()
+	// _ = u.repository.CreateLead()
 
 	// fetch balance sheet
 	businessDetails := models.BussinessDetail{

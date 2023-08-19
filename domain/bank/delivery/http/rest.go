@@ -18,7 +18,7 @@ func NewHandlerBank(e *echo.Echo, usecase bank.Usecase) {
 		usecase: usecase,
 	}
 	e.POST("/api/loan-enquiry", handler.LoanEnquiry, middleware.JWTAuthentication)
-
+	e.POST("/api/quote", handler.CreateQuote, middleware.JWTAuthentication)
 }
 
 func (h *handlerBank) LoanEnquiry(c echo.Context) error {
@@ -36,4 +36,8 @@ func (h *handlerBank) LoanEnquiry(c echo.Context) error {
 		return err
 	}
 	return c.JSON(http.StatusOK, resp)
+}
+
+func (h *handlerBank) CreateQuote(c echo.Context) error {
+	return nil
 }

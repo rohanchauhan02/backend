@@ -47,14 +47,13 @@ func (r *repoHandler) PreAssessment(balanceSheet []models.BalanceSheet, loanAmou
 		}
 		averageAssetValue += entry.AssetsValue
 	}
-
 	averageAssetValue /= float64(len(balanceSheet))
 
 	if profitInLast12Months {
-		return float64(loanAmount) * 60.0
+		return float64(loanAmount) * 0.6
 	} else if averageAssetValue > float64(loanAmount) {
-		return float64(loanAmount) * 100.0
+		return float64(loanAmount) * 1
 	} else {
-		return float64(loanAmount) * 20.0
+		return float64(loanAmount) * 0.2
 	}
 }
