@@ -1,0 +1,22 @@
+name: CI pipeline
+
+on:
+  push:
+    branches: ["main"]
+env:
+  DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+  DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: login Dockerhub
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
+      - name: Build the Docker image
+        run: docker build -t rohanchauhan02/loan-service .
+      - name: Push to Dockerhub
+        run: docker push rohanchauhan02/loan-service:latest
