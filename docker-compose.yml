@@ -1,0 +1,28 @@
+
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql8
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+
+  api:
+    image: rohanchauhan02/backend:latest
+    container_name: backend
+    ports:
+      - "11001:11001"
+    depends_on:
+      - mysql
+    environment:
+      DATABASE_HOST: localhost
+      DATABASE_PORT: 3306
+      DATABASE_NAME: test
+      DATABASE_USER: root
+      DATABASE_PASSWORD: password
+    build:
+      context: ./
+      dockerfile: ./Dockerfile

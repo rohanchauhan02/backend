@@ -24,7 +24,7 @@ RUN make engine
 FROM alpine:latest
 RUN apk update && apk upgrade && \
     apk --no-cache --update add ca-certificates tzdata && \
-    mkdir /loan-service && mkdir /app
+    mkdir /loan-service && mkdir /loan-service/app
 WORKDIR /loan-service/app
 
 
@@ -34,4 +34,4 @@ COPY --from=server_builder /go/src/github.com/rohanchauhan02/loan-service/engine
 COPY --from=server_builder /go/src/github.com/rohanchauhan02/loan-service/app.config* ./
 
 RUN ls -lh
-CMD /loan-service/app/engine
+CMD ["/loan-service/app/engine"]
