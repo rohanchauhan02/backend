@@ -1,0 +1,60 @@
+# Python Bytecode Files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Django specific
+*.log
+*.pot
+*.pyc
+*.pyo
+*.sqlite3
+*.db
+db.sqlite3
+*.bak
+*.swp
+*.swo
+media
+staticfiles
+
+.env
+
+# Virtual environment
+venv/
+ENV/
+env/
+.venv/
+.ENV/
+.python-version
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.iml
+*.sublime-project
+*.sublime-workspace
+
+# macOS specific
+.DS_Store
+
+# Windows specific
+Thumbs.db
+ehthumbs.db
+
+# mypy and pyright
+.mypy_cache/
+.pyright/
+
+# Coverage reports
+.coverage
+.coverage.*
+nosetests.xml
+coverage.xml
+*.cover
+
+# Django migrations
+migrations/
+
+# Testing
+test_*.py
