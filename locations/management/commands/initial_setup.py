@@ -2,7 +2,7 @@ import os
 import json
 import requests
 from django.core.management.base import BaseCommand
-from locations.models import Locations
+from locations.models import Location
 
 
 class Command(BaseCommand):
@@ -13,6 +13,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         json_file = kwargs["json_file"]
+        data = {}
 
         # Check if json_file is a URL or local path
         if json_file.startswith("http://") or json_file.startswith("https://"):
@@ -37,20 +38,20 @@ class Command(BaseCommand):
                 data = json.load(file)
 
         # Process JSON data
-        for unloc_code, value in data.items():
-            Locations.objects.update_or_create(
-                unloc_code=unloc_code,  # Unique identifier for each location
+        for loc_code, value in data.items():
+            Location.objects.update_or_create(
+                unloc_code=loc_code,
                 defaults={
                     "name": value.get("name"),
                     "city": value.get("city"),
                     "province": value.get("province"),
                     "country": value.get("country"),
                     "timezone": value.get("timezone"),
-                    "latitude": value["coordinates"][1] if "coordinates" in value else None,
-                    "longitude": value["coordinates"][0] if "coordinates" in value else None,
-                    "port_code": value.get("code"),
+                    "coordinates": value.get("coordinates",[]),
+                    "code": value.get("code"),
                     "alias": value.get("alias", []),
                     "regions": value.get("regions", []),
+                    "unlocs" : value.get("unlocs", []),
                 },
             )
 

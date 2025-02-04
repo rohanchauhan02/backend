@@ -19,6 +19,10 @@ migrate:
 	python manage.py makemigrations
 	python manage.py migrate
 
+show:
+	python manage.py showmigrations
+
+
 # Create a superuser for the Django admin panel
 createsuperuser:
 	python manage.py createsuperuser
