@@ -38,7 +38,7 @@ class Command(BaseCommand):
 
         # Process JSON data
         for unloc_code, value in data.items():
-            Location.objects.update_or_create(
+            Locations.objects.update_or_create(
                 unloc_code=unloc_code,  # Unique identifier for each location
                 defaults={
                     "name": value.get("name"),

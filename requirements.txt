@@ -4,3 +4,4 @@ split_settings
 flake8
 black
 requests
+djangorestframework
