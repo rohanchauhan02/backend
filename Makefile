@@ -2,8 +2,6 @@
 # Define the virtual environment commands using pipenv
 venv:
 	python3.10 -m venv venv
-
-activate:
 	source venv/bin/activate
 
 rm:
@@ -21,7 +19,6 @@ migrate:
 
 show:
 	python manage.py showmigrations
-
 
 # Create a superuser for the Django admin panel
 createsuperuser:

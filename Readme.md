@@ -1,3 +1,4 @@
+---
 # Django Template Repository
 
 This is a template repository for setting up Django projects with best practices.
@@ -9,9 +10,7 @@ This is a template repository for setting up Django projects with best practices
 Run the following command to create and activate a virtual environment:
 
 ```sh
-python -m venv venv
-source venv/bin/activate  # On macOS/Linux
-venv\Scripts\activate  # On Windows
+make venv
 ```
 
 ### 2. Install Dependencies
@@ -19,7 +18,7 @@ venv\Scripts\activate  # On Windows
 After activating the virtual environment, install the required dependencies:
 
 ```sh
-pip install -r requirements.txt
+make install
 ```
 
 ### 3. Apply Migrations
@@ -27,7 +26,7 @@ pip install -r requirements.txt
 Run the database migrations to set up the schema:
 
 ```sh
-python manage.py migrate
+make migrate
 ```
 
 ### 4. Run the Development Server
@@ -35,7 +34,7 @@ python manage.py migrate
 Start the Django development server:
 
 ```sh
-python manage.py runserver
+make start
 ```
 
 ### 5. Custom Management Command
@@ -43,7 +42,7 @@ python manage.py runserver
 This template includes a custom management command for initial setup. Run:
 
 ```sh
-python manage.py initial-setup
+python manage.py initial_setup <file_path or link>
 ```
 
 ### 6. Creating a Superuser
@@ -67,5 +66,3 @@ cp .env.example .env
 This project includes CRUD APIs. You can test them using Postman or cURL.
 
 ---
-
-Would you like me to include additional sections, such as Docker setup, deployment instructions, or testing guidelines? 🚀
