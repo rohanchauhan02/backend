@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from rest_framework import generics
+from .models import Locations
+from .serializers import LocationSerializer
 
-# Create your views here.
+class LocationListCreateView(generics.ListCreateAPIView):
+    queryset = Locations.objects.all()
+    serializer_class = LocationSerializer
+
+class LocationRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Locations.objects.all()
+    serializer_class = LocationSerializer
