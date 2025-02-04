@@ -37,6 +37,7 @@ collectstatic:
 
 # Create a new Django app (usage: make app name=app_name)
 app:
+	@[ -n "$(name)" ] || (echo "Error: Missing app name. Usage: make app name=your_app_name" && exit 1)
 	python manage.py startapp $(name)
 
 # Format the code using black

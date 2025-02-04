@@ -3,3 +3,4 @@ mysqlclient==2.2.7
 split_settings
 flake8
 black
+requests
