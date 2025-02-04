@@ -60,7 +60,7 @@ jobs:
           mysql -h 127.0.0.1 -u root --password=root -e "SHOW DATABASES;"
 
       - name: Apply Migrations
-        run: python manage.py migrate
+        run: make migrate
 
       - name: Run Tests
         run: python manage.py test
