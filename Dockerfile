@@ -47,5 +47,5 @@ ENV PYTHONUNBUFFERED=1 \
     DEBUG=False
 
 # Run Django server using Gunicorn
-CMD ["python", "manage.py", "runserver", "127.0.0.1:11001"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:11001"]
 

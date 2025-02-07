@@ -27,14 +27,14 @@ services:
     working_dir: /app
     command: >
       sh -c "make migrate &&
-             python manage.py runserver 127.0.0.1:11001"
+             python manage.py runserver 0.0.0.0:11001"
     volumes:
       - .:/app
     ports:
       - "11001:11001"
     environment:
-      - DB_HOST=db  # Use the service name here
-      - DB_NAME=backend
+      - DB_HOST=db
+      - DB_NAME=backendv
       - DB_USER=root
       - DB_PASSWORD=root
       - ALLOWED_HOSTS=0.0.0.0,127.0.0.1,localhost
