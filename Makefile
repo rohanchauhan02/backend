@@ -1,5 +1,12 @@
 
 # Define the virtual environment commands using pipenv
+
+up:
+	docker compose up --build
+
+down:
+	docker compose down -v
+
 venv:
 	python3.10 -m venv venv
 	source venv/bin/activate
@@ -8,6 +15,7 @@ rm:
 	rm -rf venv
 
 install:
+	pip install --upgrade pip setuptools wheel
 	pip install -r requirements.txt
 
 start:
