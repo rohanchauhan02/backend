@@ -61,15 +61,6 @@ Copy `.env.example` to `.env` and configure your environment variables:
 cp .env.example .env
 ```
 
-### 8. API Endpoints
-
-This project includes CRUD APIs. You can test them using Postman or cURL.
-
----
-
-
-# API'S
-
 ## Locations API
 
 ### 1. Get Location
