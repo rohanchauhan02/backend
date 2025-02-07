@@ -1,34 +1,51 @@
 # ==========================
 # Stage 1: Build Dependencies
 # ==========================
-FROM python:3.10 AS builder
+FROM python:3.10.2-bullseye AS builder
 
 WORKDIR /app
 
+# Install system dependencies required for mysqlclient
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libssl-dev \
+    libffi-dev \
+    libmariadb-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 # Copy requirements file and install dependencies
 COPY requirements.txt .
-RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
 # ==========================
 # Stage 2: Production Image
 # ==========================
-FROM python:3.10-slim
+FROM python:3.10.2-bullseye
 
 WORKDIR /app
 
-# Copy the installed packages from the builder stage to the production stage
+# Install runtime dependencies
+RUN apt-get update && apt-get install -y \
+    libssl-dev \
+    libffi-dev \
+    libmariadb-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy installed Python packages from the builder stage
 COPY --from=builder /usr/local/lib/python3.10/site-packages /usr/local/lib/python3.10/site-packages
 
-# Copy the project files into the container
+# Copy project files into the container
 COPY . /app
 
-# Expose port 8000
-EXPOSE 8000
+# Expose the application port
+EXPOSE 11001
 
 # Set environment variables for production
 ENV PYTHONUNBUFFERED=1 \
-    DJANGO_SETTINGS_MODULE=myproject.settings \
+    DJANGO_SETTINGS_MODULE=app.settings \
     DEBUG=False
 
-# Run Django server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Run Django server using Gunicorn
+CMD ["python", "manage.py", "runserver", "127.0.0.1:11001"]
+
